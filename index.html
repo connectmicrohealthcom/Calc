@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free 3D printing profit calculator. Calculate true print cost, break-even price, recommended selling price, profit and margin.">
+<title>3D Print Profit Calculator</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#172033;background:#f6f7fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1050px;margin:auto;padding:32px 18px 60px}.hero{text-align:center;padding:30px 0}.hero h1{font-size:clamp(32px,6vw,54px);margin:0 0 12px;letter-spacing:-1.5px}.hero p{margin:0 auto;max-width:680px;color:#667085;font-size:18px;line-height:1.5}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:24px;box-shadow:0 8px 30px #1018280a}.card h2{font-size:19px;margin:0 0 20px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field label{display:block;font-size:13px;font-weight:650;margin-bottom:7px;color:#344054}.input{display:flex;border:1px solid #d0d5dd;border-radius:10px;overflow:hidden;background:#fff}.input span{padding:11px 10px;color:#667085;background:#f9fafb;border-right:1px solid #eaecf0}.input input{width:100%;border:0;padding:11px;font:inherit;outline:0}.input:focus-within{border-color:#667eea;box-shadow:0 0 0 3px #667eea18}.results{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{padding:17px;border-radius:13px;background:#f8f9fc}.metric small{display:block;color:#667085;margin-bottom:6px}.metric strong{font-size:23px}.primary{grid-column:1/-1;background:#eef2ff}.primary strong{font-size:32px}.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer}.btn.main{background:#172033;color:#fff}.btn.alt{background:#eef2f6;color:#172033}.note{font-size:12px;color:#667085;line-height:1.5;margin-top:16px}.projection{margin-top:18px}.projection input{width:100%;padding:11px;border:1px solid #d0d5dd;border-radius:10px;font:inherit}.footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:25px}@media(max-width:760px){.grid{grid-template-columns:1fr}.fields,.results{grid-template-columns:1fr}.primary{grid-column:auto}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero"><h1>3D Print Profit Calculator</h1><p>Know your true cost before you price a print. Calculate break-even, recommended selling price, profit and margin in seconds.</p></section>
+<div class="grid">
+<section class="card"><h2>1. Your print costs</h2><div class="fields">
+<div class="field"><label>Filament price / kg</label><div class="input"><span>$</span><input id="filamentPrice" type="number" min="0" step="0.01" value="20"></div></div>
+<div class="field"><label>Filament used</label><div class="input"><input id="grams" type="number" min="0" step="1" value="80"><span>g</span></div></div>
+<div class="field"><label>Print time</label><div class="input"><input id="hours" type="number" min="0" step="0.1" value="4"><span>hrs</span></div></div>
+<div class="field"><label>Electricity cost</label><div class="input"><span>$</span><input id="electricity" type="number" min="0" step="0.001" value="0.15"><span>/kWh</span></div></div>
+<div class="field"><label>Printer power draw</label><div class="input"><input id="watts" type="number" min="0" step="1" value="150"><span>W</span></div></div>
+<div class="field"><label>Printer cost</label><div class="input"><span>$</span><input id="printerCost" type="number" min="0" step="1" value="500"></div></div>
+<div class="field"><label>Expected printer life</label><div class="input"><input id="life" type="number" min="1" step="100" value="3000"><span>hrs</span></div></div>
+<div class="field"><label>Waste / failure rate</label><div class="input"><input id="waste" type="number" min="0" max="100" step="1" value="10"><span>%</span></div></div>
+<div class="field"><label>Labour per print</label><div class="input"><span>$</span><input id="labor" type="number" min="0" step="0.01" value="2"></div></div>
+<div class="field"><label>Payment / marketplace fee</label><div class="input"><input id="fee" type="number" min="0" max="100" step="0.1" value="10"><span>%</span></div></div>
+<div class="field"><label>Target profit margin</label><div class="input"><input id="margin" type="number" min="0" max="99" step="1" value="30"><span>%</span></div></div>
+</div></section>
+<section class="card"><h2>2. Your result</h2><div class="results">
+<div class="metric"><small>Material cost</small><strong id="material">$0.00</strong></div>
+<div class="metric"><small>Electricity cost</small><strong id="power">$0.00</strong></div>
+<div class="metric"><small>Machine cost</small><strong id="machine">$0.00</strong></div>
+<div class="metric"><small>True cost / print</small><strong id="cost">$0.00</strong></div>
+<div class="metric primary"><small>Recommended selling price</small><strong id="price">$0.00</strong></div>
+<div class="metric"><small>Profit / print</small><strong id="profit">$0.00</strong></div>
+<div class="metric"><small>Profit margin</small><strong id="actualMargin">0%</strong></div>
+<div class="metric"><small>Break-even price</small><strong id="breakEven">$0.00</strong></div>
+</div>
+<div class="projection"><label><small>Units sold</small><input id="units" type="number" min="1" step="1" value="100"></label><div class="results" style="margin-top:12px"><div class="metric"><small>Projected revenue</small><strong id="revenue">$0.00</strong></div><div class="metric"><small>Projected profit</small><strong id="totalProfit">$0.00</strong></div></div></div>
+<div class="actions"><button class="btn main" onclick="window.print()">Print / Save result</button><button class="btn alt" onclick="resetCalc()">Reset</button></div>
+<p class="note">The calculator uses the target margin as a percentage of selling price and accounts for the marketplace/payment fee. Waste increases expected material consumption. Printer depreciation is allocated over the expected machine life.</p>
+</section></div><div class="footer">Free tool · Estimates only · Adjust inputs to match your actual machine and marketplace costs.</div>
+</main>
+<script>
+const ids=['filamentPrice','grams','hours','electricity','watts','printerCost','life','waste','labor','fee','margin','units'];
+function n(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
+function money(x){return '$'+x.toFixed(2)}
+function calc(){
+ const material=n('filamentPrice')/1000*n('grams')*(1+n('waste')/100);
+ const power=n('hours')*n('watts')/1000*n('electricity');
+ const machine=n('printerCost')/Math.max(1,n('life'))*n('hours');
+ const cost=material+power+machine+n('labor');
+ const fee=n('fee')/100, margin=n('margin')/100;
+ // price - fee*price - margin*price = cost
+ const denom=1-fee-margin;
+ const price=denom>0?cost/denom:0;
+ const profit=price*(1-fee)-cost;
+ const actual=price?profit/price*100:0;
+ const units=Math.max(1,n('units'));
+ document.getElementById('material').textContent=money(material);document.getElementById('power').textContent=money(power);document.getElementById('machine').textContent=money(machine);document.getElementById('cost').textContent=money(cost);document.getElementById('price').textContent=money(price);document.getElementById('profit').textContent=money(profit);document.getElementById('actualMargin').textContent=actual.toFixed(1)+'%';
+ const be=fee<1?cost/(1-fee):0;document.getElementById('breakEven').textContent=money(be);document.getElementById('revenue').textContent=money(price*units);document.getElementById('totalProfit').textContent=money(profit*units);
+}
+ids.forEach(id=>document.getElementById(id).addEventListener('input',calc));
+function resetCalc(){document.querySelectorAll('input').forEach(x=>x.defaultValue!==undefined&&(x.value=x.defaultValue));calc()}
+calc();
+</script></body></html>
