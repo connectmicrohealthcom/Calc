@@ -36,21 +36,21 @@
 <div class="metric"><small>Break-even price</small><strong id="breakEven">$0.00</strong></div>
 </div>
 <div class="projection"><label><small>Units sold</small><input id="units" type="number" min="1" step="1" value="100"></label><div class="results" style="margin-top:12px"><div class="metric"><small>Projected revenue</small><strong id="revenue">$0.00</strong></div><div class="metric"><small>Projected profit</small><strong id="totalProfit">$0.00</strong></div></div></div>
-<div class="actions"><button class="btn main" onclick="window.print()">Print / Save result</button><button class="btn alt" onclick="resetCalc()">Reset</button></div>
+<div class="actions"><button type="button" class="btn main" onclick="window.print()">Print / Save result</button><button type="button" class="btn alt" id="resetButton">Reset</button></div>
 <p class="note">The calculator uses the target margin as a percentage of selling price and accounts for the marketplace/payment fee. Waste increases expected material consumption. Printer depreciation is allocated over the expected machine life.</p>
 </section></div><div class="footer">Free tool · Estimates only · Adjust inputs to match your actual machine and marketplace costs.</div>
 </main>
 <script>
-const ids=['filamentPrice','grams','hours','electricity','watts','printerCost','life','waste','labor','fee','margin','units'];
+const defaults={filamentPrice:20,grams:80,hours:4,electricity:0.15,watts:150,printerCost:500,life:3000,waste:10,labor:2,fee:10,margin:30,units:100};
+const ids=Object.keys(defaults);
 function n(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
 function money(x){return '$'+x.toFixed(2)}
 function calc(){
  const material=n('filamentPrice')/1000*n('grams')*(1+n('waste')/100);
- const power=n('hours')*n('watts')/1000*n('electricity');
+ const power=n('hours')*n('watts')/1000*n('electricity);
  const machine=n('printerCost')/Math.max(1,n('life'))*n('hours');
  const cost=material+power+machine+n('labor');
  const fee=n('fee')/100, margin=n('margin')/100;
- // price - fee*price - margin*price = cost
  const denom=1-fee-margin;
  const price=denom>0?cost/denom:0;
  const profit=price*(1-fee)-cost;
@@ -60,6 +60,10 @@ function calc(){
  const be=fee<1?cost/(1-fee):0;document.getElementById('breakEven').textContent=money(be);document.getElementById('revenue').textContent=money(price*units);document.getElementById('totalProfit').textContent=money(profit*units);
 }
 ids.forEach(id=>document.getElementById(id).addEventListener('input',calc));
-function resetCalc(){document.querySelectorAll('input').forEach(x=>x.defaultValue!==undefined&&(x.value=x.defaultValue));calc()}
+function resetCalc(){
+ ids.forEach(id=>{document.getElementById(id).value=defaults[id]});
+ calc();
+}
+document.getElementById('resetButton').addEventListener('click',resetCalc);
 calc();
 </script></body></html>
