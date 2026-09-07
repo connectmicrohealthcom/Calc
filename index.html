@@ -47,7 +47,7 @@ function n(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
 function money(x){return '$'+x.toFixed(2)}
 function calc(){
  const material=n('filamentPrice')/1000*n('grams')*(1+n('waste')/100);
- const power=n('hours')*n('watts')/1000*n('electricity);
+ const power=n('hours')*n('watts')/1000*n('electricity');
  const machine=n('printerCost')/Math.max(1,n('life'))*n('hours');
  const cost=material+power+machine+n('labor');
  const fee=n('fee')/100, margin=n('margin')/100;
