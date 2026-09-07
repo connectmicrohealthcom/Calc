@@ -3,67 +3,67 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Free 3D printing profit calculator. Calculate true print cost, break-even price, recommended selling price, profit and margin.">
+<meta name="description" content="3D printing profit calculator. Quickly calculate material cost, break-even price and a profitable selling price.">
 <title>3D Print Profit Calculator</title>
 <style>
-:root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#172033;background:#f6f7fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1050px;margin:auto;padding:32px 18px 60px}.hero{text-align:center;padding:30px 0}.hero h1{font-size:clamp(32px,6vw,54px);margin:0 0 12px;letter-spacing:-1.5px}.hero p{margin:0 auto;max-width:680px;color:#667085;font-size:18px;line-height:1.5}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:24px;box-shadow:0 8px 30px #1018280a}.card h2{font-size:19px;margin:0 0 20px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field label{display:block;font-size:13px;font-weight:650;margin-bottom:7px;color:#344054}.input{display:flex;border:1px solid #d0d5dd;border-radius:10px;overflow:hidden;background:#fff}.input span{padding:11px 10px;color:#667085;background:#f9fafb;border-right:1px solid #eaecf0}.input input{width:100%;border:0;padding:11px;font:inherit;outline:0}.input:focus-within{border-color:#667eea;box-shadow:0 0 0 3px #667eea18}.results{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{padding:17px;border-radius:13px;background:#f8f9fc}.metric small{display:block;color:#667085;margin-bottom:6px}.metric strong{font-size:23px}.primary{grid-column:1/-1;background:#eef2ff}.primary strong{font-size:32px}.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer}.btn.main{background:#172033;color:#fff}.btn.alt{background:#eef2f6;color:#172033}.note{font-size:12px;color:#667085;line-height:1.5;margin-top:16px}.projection{margin-top:18px}.projection input{width:100%;padding:11px;border:1px solid #d0d5dd;border-radius:10px;font:inherit}.footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:25px}@media(max-width:760px){.grid{grid-template-columns:1fr}.fields,.results{grid-template-columns:1fr}.primary{grid-column:auto}}
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#172033;background:#f6f7fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:980px;margin:auto;padding:28px 18px 60px}.hero{text-align:center;padding:25px 0 30px}.hero h1{font-size:clamp(32px,6vw,52px);margin:0 0 10px;letter-spacing:-1.5px}.hero p{margin:0 auto;max-width:650px;color:#667085;font-size:17px;line-height:1.5}.toolbar{display:flex;justify-content:flex-end;margin-bottom:14px}.currency{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #d0d5dd;border-radius:10px;padding:7px 10px;font-size:13px;color:#344054}.currency select{border:0;background:transparent;font:inherit;font-weight:700;outline:0;cursor:pointer}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:24px;box-shadow:0 8px 30px #1018280a}.card h2{font-size:19px;margin:0 0 6px}.sub{font-size:13px;color:#667085;margin:0 0 20px;line-height:1.45}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field label{display:block;font-size:13px;font-weight:650;margin-bottom:7px;color:#344054}.help{font-weight:400;color:#98a2b3}.input{display:flex;border:1px solid #d0d5dd;border-radius:10px;overflow:hidden;background:#fff}.input span{padding:11px 10px;color:#667085;background:#f9fafb;border-right:1px solid #eaecf0}.input input{width:100%;border:0;padding:11px;font:inherit;outline:0}.input:focus-within{border-color:#667eea;box-shadow:0 0 0 3px #667eea18}.input input::placeholder{color:#98a2b3}.advanced{margin-top:20px;border-top:1px solid #eaecf0;padding-top:16px}.advanced summary{cursor:pointer;font-weight:700;font-size:14px;color:#344054}.advanced .fields{margin-top:16px}.tip{margin-top:14px;padding:11px 12px;background:#f8f9fc;border-radius:10px;font-size:12px;color:#667085;line-height:1.5}.results{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{padding:16px;border-radius:13px;background:#f8f9fc}.metric small{display:block;color:#667085;margin-bottom:6px}.metric strong{font-size:22px}.primary{grid-column:1/-1;background:#eef2ff}.primary strong{font-size:32px}.projection{margin-top:18px;padding-top:18px;border-top:1px solid #eaecf0}.projection label{display:block;font-size:13px;font-weight:650;color:#344054}.projection input{width:100%;margin-top:7px;padding:11px;border:1px solid #d0d5dd;border-radius:10px;font:inherit}.empty{grid-column:1/-1;text-align:center;padding:32px 15px;color:#667085;background:#f8f9fc;border-radius:13px}.empty strong{display:block;color:#344054;margin-bottom:5px}.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer}.btn.main{background:#172033;color:#fff}.btn.alt{background:#eef2f6;color:#172033}.note{font-size:12px;color:#667085;line-height:1.5;margin-top:16px}.footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:25px}@media(max-width:760px){.grid{grid-template-columns:1fr}.fields,.results{grid-template-columns:1fr}.primary{grid-column:auto}.toolbar{justify-content:center}}
 </style>
 </head>
 <body><main class="wrap">
-<section class="hero"><h1>3D Print Profit Calculator</h1><p>Know your true cost before you price a print. Calculate break-even, recommended selling price, profit and margin in seconds.</p></section>
+<section class="hero"><h1>3D Print Profit Calculator</h1><p>Enter the few numbers you already get from your slicer and filament spool. We'll work out what you should charge.</p></section>
+<div class="toolbar"><label class="currency">Currency <select id="currency" aria-label="Currency"><option value="USD">USD — $</option><option value="AED">AED — د.إ</option><option value="EUR">EUR — €</option><option value="GBP">GBP — £</option><option value="CAD">CAD — $</option><option value="AUD">AUD — $</option><option value="INR">INR — ₹</option><option value="SAR">SAR — ﷼</option><option value="QAR">QAR — ﷼</option><option value="KWD">KWD — د.ك</option></select></label></div>
 <div class="grid">
-<section class="card"><h2>1. Your print costs</h2><div class="fields">
-<div class="field"><label>Filament price / kg</label><div class="input"><span>$</span><input id="filamentPrice" type="number" min="0" step="0.01" value="20"></div></div>
-<div class="field"><label>Filament used</label><div class="input"><input id="grams" type="number" min="0" step="1" value="80"><span>g</span></div></div>
-<div class="field"><label>Print time</label><div class="input"><input id="hours" type="number" min="0" step="0.1" value="4"><span>hrs</span></div></div>
-<div class="field"><label>Electricity cost</label><div class="input"><span>$</span><input id="electricity" type="number" min="0" step="0.001" value="0.15"><span>/kWh</span></div></div>
-<div class="field"><label>Printer power draw</label><div class="input"><input id="watts" type="number" min="0" step="1" value="150"><span>W</span></div></div>
-<div class="field"><label>Printer cost</label><div class="input"><span>$</span><input id="printerCost" type="number" min="0" step="1" value="500"></div></div>
-<div class="field"><label>Expected printer life</label><div class="input"><input id="life" type="number" min="1" step="100" value="3000"><span>hrs</span></div></div>
-<div class="field"><label>Waste / failure rate</label><div class="input"><input id="waste" type="number" min="0" max="100" step="1" value="10"><span>%</span></div></div>
-<div class="field"><label>Labour per print</label><div class="input"><span>$</span><input id="labor" type="number" min="0" step="0.01" value="2"></div></div>
-<div class="field"><label>Payment / marketplace fee</label><div class="input"><input id="fee" type="number" min="0" max="100" step="0.1" value="10"><span>%</span></div></div>
-<div class="field"><label>Target profit margin</label><div class="input"><input id="margin" type="number" min="0" max="99" step="1" value="30"><span>%</span></div></div>
-</div></section>
-<section class="card"><h2>2. Your result</h2><div class="results">
-<div class="metric"><small>Material cost</small><strong id="material">$0.00</strong></div>
-<div class="metric"><small>Electricity cost</small><strong id="power">$0.00</strong></div>
-<div class="metric"><small>Machine cost</small><strong id="machine">$0.00</strong></div>
-<div class="metric"><small>True cost / print</small><strong id="cost">$0.00</strong></div>
-<div class="metric primary"><small>Recommended selling price</small><strong id="price">$0.00</strong></div>
-<div class="metric"><small>Profit / print</small><strong id="profit">$0.00</strong></div>
-<div class="metric"><small>Profit margin</small><strong id="actualMargin">0%</strong></div>
-<div class="metric"><small>Break-even price</small><strong id="breakEven">$0.00</strong></div>
-</div>
-<div class="projection"><label><small>Units sold</small><input id="units" type="number" min="1" step="1" value="100"></label><div class="results" style="margin-top:12px"><div class="metric"><small>Projected revenue</small><strong id="revenue">$0.00</strong></div><div class="metric"><small>Projected profit</small><strong id="totalProfit">$0.00</strong></div></div></div>
-<div class="actions"><button type="button" class="btn main" onclick="window.print()">Print / Save result</button><button type="button" class="btn alt" id="resetButton">Reset</button></div>
-<p class="note">The calculator uses the target margin as a percentage of selling price and accounts for the marketplace/payment fee. Waste increases expected material consumption. Printer depreciation is allocated over the expected machine life.</p>
-</section></div><div class="footer">Free tool · Estimates only · Adjust inputs to match your actual machine and marketplace costs.</div>
+<section class="card"><h2>Quick calculation</h2><p class="sub">These are the only numbers you really need to get started.</p><div class="fields">
+<div class="field"><label>Filament price / kg</label><div class="input"><span data-currency>$</span><input id="filamentPrice" type="number" min="0" step="0.01" placeholder="e.g. 20"></div></div>
+<div class="field"><label>Filament used <span class="help">from your slicer</span></label><div class="input"><input id="grams" type="number" min="0" step="1" placeholder="e.g. 80"><span>g</span></div></div>
+<div class="field"><label>Print time <span class="help">from your slicer</span></label><div class="input"><input id="hours" type="number" min="0" step="0.1" placeholder="e.g. 4"><span>hrs</span></div></div>
+<div class="field"><label>Marketplace / payment fee</label><div class="input"><input id="fee" type="number" min="0" max="99" step="0.1" placeholder="e.g. 10"><span>%</span></div></div>
+<div class="field"><label>Target profit margin</label><div class="input"><input id="margin" type="number" min="0" max="99" step="1" placeholder="e.g. 30"><span>%</span></div></div>
+</div><div class="tip"><strong>Where do I find these?</strong> Your slicer normally gives you grams and print time. Filament price is on the spool/listing. Your selling platform tells you its fee. Choose the margin you want to keep after costs.</div>
+<details class="advanced"><summary>Advanced costs — optional</summary><div class="fields">
+<div class="field"><label>Electricity rate</label><div class="input"><span data-currency>$</span><input id="electricity" type="number" min="0" step="0.001" placeholder="e.g. 0.15"><span>/kWh</span></div></div>
+<div class="field"><label>Printer power draw</label><div class="input"><input id="watts" type="number" min="0" step="1" placeholder="e.g. 150"><span>W</span></div></div>
+<div class="field"><label>Printer purchase price</label><div class="input"><span data-currency>$</span><input id="printerCost" type="number" min="0" step="1" placeholder="e.g. 500"></div></div>
+<div class="field"><label>Expected printer life</label><div class="input"><input id="life" type="number" min="1" step="100" placeholder="e.g. 3000"><span>hrs</span></div></div>
+<div class="field"><label>Waste / failed-print rate</label><div class="input"><input id="waste" type="number" min="0" max="100" step="1" placeholder="e.g. 10"><span>%</span></div></div>
+<div class="field"><label>Labour per print</label><div class="input"><span data-currency>$</span><input id="labor" type="number" min="0" step="0.01" placeholder="e.g. 2"></div></div>
+</div><div class="tip">Don't know these yet? Leave them blank. The quick calculation still works. Add them later when you want a more complete cost estimate.</div></details>
+</section>
+<section class="card"><h2>Your result</h2><p class="sub">Fill in the five quick fields to see your price.</p><div id="results" class="results"><div class="empty"><strong>Your result will appear here</strong>Start with filament price, grams, print time, fee and target margin.</div></div>
+<div class="projection"><label>Number of copies <span class="help">optional</span><input id="units" type="number" min="1" step="1" value="1"></label></div>
+<div class="actions"><button type="button" class="btn main" id="printButton">Print / Save result</button><button type="button" class="btn alt" id="resetButton">Reset</button><button type="button" class="btn alt" id="exampleButton">Try an example</button></div>
+<p class="note">This is an estimate, not a guarantee of profitability. Marketplace fees can include fixed fees not represented by a percentage, so add a little pricing buffer where appropriate.</p>
+</section></div><div class="footer">Free tool · Enter costs in your selected currency · No data is sent anywhere.</div>
 </main>
 <script>
-const defaults={filamentPrice:20,grams:80,hours:4,electricity:0.15,watts:150,printerCost:500,life:3000,waste:10,labor:2,fee:10,margin:30,units:100};
-const ids=Object.keys(defaults);
-function n(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
-function money(x){return '$'+x.toFixed(2)}
+const currencySymbols={USD:'$',AED:'د.إ',EUR:'€',GBP:'£',CAD:'$',AUD:'$',INR:'₹',SAR:'﷼',QAR:'﷼',KWD:'د.ك'};
+const requiredIds=['filamentPrice','grams','hours','fee','margin'];
+const advancedIds=['electricity','watts','printerCost','life','waste','labor'];
+const allIds=[...requiredIds,...advancedIds,'units'];
+const example={filamentPrice:20,grams:80,hours:4,fee:10,margin:30,electricity:0.15,watts:150,printerCost:500,life:3000,waste:10,labor:2,units:10};
+function value(id){const v=Number(document.getElementById(id).value);return Number.isFinite(v)&&v>=0?v:0}
+function hasValue(id){return document.getElementById(id).value.trim()!==''}
+function money(x){const code=document.getElementById('currency').value;return new Intl.NumberFormat(undefined,{style:'currency',currency:code,maximumFractionDigits:2}).format(x)}
+function updateCurrency(){const symbol=currencySymbols[document.getElementById('currency').value]||'$';document.querySelectorAll('[data-currency]').forEach(el=>el.textContent=symbol);calc()}
 function calc(){
- const material=n('filamentPrice')/1000*n('grams')*(1+n('waste')/100);
- const power=n('hours')*n('watts')/1000*n('electricity');
- const machine=n('printerCost')/Math.max(1,n('life'))*n('hours');
- const cost=material+power+machine+n('labor');
- const fee=n('fee')/100, margin=n('margin')/100;
+ const ready=requiredIds.every(hasValue);const results=document.getElementById('results');
+ if(!ready){results.innerHTML='<div class="empty"><strong>Your result will appear here</strong>Start with filament price, grams, print time, fee and target margin.</div>';return}
+ const filament=value('filamentPrice'),grams=value('grams'),hours=value('hours'),fee=value('fee')/100,margin=value('margin')/100;
+ const waste=hasValue('waste')?value('waste')/100:0;
+ const material=filament/1000*grams*(1+waste);
+ const electricity=hasValue('electricity')&&hasValue('watts')?hours*value('watts')/1000*value('electricity'):0;
+ const machine=hasValue('printerCost')&&hasValue('life')&&value('life')>0?value('printerCost')/value('life')*hours:0;
+ const labor=hasValue('labor')?value('labor'):0;
+ const cost=material+electricity+machine+labor;
  const denom=1-fee-margin;
- const price=denom>0?cost/denom:0;
- const profit=price*(1-fee)-cost;
- const actual=price?profit/price*100:0;
- const units=Math.max(1,n('units'));
- document.getElementById('material').textContent=money(material);document.getElementById('power').textContent=money(power);document.getElementById('machine').textContent=money(machine);document.getElementById('cost').textContent=money(cost);document.getElementById('price').textContent=money(price);document.getElementById('profit').textContent=money(profit);document.getElementById('actualMargin').textContent=actual.toFixed(1)+'%';
- const be=fee<1?cost/(1-fee):0;document.getElementById('breakEven').textContent=money(be);document.getElementById('revenue').textContent=money(price*units);document.getElementById('totalProfit').textContent=money(profit*units);
+ if(denom<=0){results.innerHTML='<div class="empty"><strong>Margin is too high</strong>Fee + target margin must be below 100%.</div>';return}
+ const price=cost/denom;const profit=price*(1-fee)-cost;const breakEven=fee<1?cost/(1-fee):0;const units=Math.max(1,value('units')||1);
+ results.innerHTML='<div class="metric"><small>Material cost</small><strong>'+money(material)+'</strong></div><div class="metric"><small>Electricity</small><strong>'+money(electricity)+'</strong></div><div class="metric"><small>Machine cost</small><strong>'+money(machine)+'</strong></div><div class="metric"><small>Total cost / print</small><strong>'+money(cost)+'</strong></div><div class="metric primary"><small>Recommended selling price</small><strong>'+money(price)+'</strong></div><div class="metric"><small>Profit / print</small><strong>'+money(profit)+'</strong></div><div class="metric"><small>Break-even price</small><strong>'+money(breakEven)+'</strong></div><div class="metric"><small>Profit at '+units+' copies</small><strong>'+money(profit*units)+'</strong></div>';
 }
-ids.forEach(id=>document.getElementById(id).addEventListener('input',calc));
-function resetCalc(){
- ids.forEach(id=>{document.getElementById(id).value=defaults[id]});
- calc();
-}
-document.getElementById('resetButton').addEventListener('click',resetCalc);
-calc();
+allIds.forEach(id=>document.getElementById(id).addEventListener('input',calc));
+document.getElementById('currency').addEventListener('change',updateCurrency);
+document.getElementById('resetButton').addEventListener('click',()=>{allIds.forEach(id=>document.getElementById(id).value=id==='units'?'1':'');document.getElementById('currency').value='USD';updateCurrency()});
+document.getElementById('exampleButton').addEventListener('click',()=>{Object.entries(example).forEach(([id,v])=>document.getElementById(id).value=v);calc()});
+document.getElementById('printButton').addEventListener('click',()=>window.print());
+updateCurrency();
 </script></body></html>
